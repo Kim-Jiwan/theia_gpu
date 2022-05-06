@@ -54,32 +54,32 @@ module TestBench_Theia;
 	// Inputs
 	reg Clock;
 	reg Reset;
-	wire [`WB_WIDTH-1:0] 		DAT_O;
+	wire [`WB_WIDTH-1:0] 			DAT_O;
 	reg		  						ACK_O;
-	wire								ACK_I;
-	wire [`WB_WIDTH-1:0] 		ADR_I,ADR_O;
-	wire 								WE_I,STB_I;
-	wire 								CYC_O,WE_O,TGC_O,STB_O;
+	wire							ACK_I;
+	wire [`WB_WIDTH-1:0] 			ADR_I,ADR_O;
+	wire 							WE_I,STB_I;
+	wire 							CYC_O,WE_O,TGC_O,STB_O;
 	wire [1:0] 						TGA_O;
 	wire [1:0] 						TGA_I;
 	reg [`WB_WIDTH-1:0] 			TMADR_O,TMDAT_O;
-	reg [`MAX_TMEM_BANKS-1:0] 	TMSEL_O;
-	reg 								TMWE_O;
+	reg [`MAX_TMEM_BANKS-1:0] 		TMSEL_O;
+	reg 							TMWE_O;
 	reg [31:0] 						rControlRegister[2:0]; 
-	integer 							file, log;
-	reg [31:0] rSceneParameters[120:0];
+	integer 						file, log;
+	reg [31:0] 						rSceneParameters[120:0];
 	reg [31:0] 						rVertexBuffer[7000:0];
 	reg [31:0] 						rInstructionBuffer[512:0];
 	reg [31:0]  					rTextures[`TEXTURE_BUFFER_SIZE:0];		//Lets asume we use 256*256 textures
 	reg [7:0] 						rScreen[`MAX_SCREENBUFFER-1:0];
-	wire [`MAX_CORES-1:0] 		wCoreSelect;
+	wire [`MAX_CORES-1:0] 			wCoreSelect;
 	wire [3:0] 						CYC_I,GNT_O;
-	wire 								MST_O;
-	wire 								wDone;
-	wire [`MAX_CORES-1:0] 		RENDREN_O;
-	reg [`MAX_CORE_BITS-1:0]  	wOMEMBankSelect;
+	wire 							MST_O;
+	wire 							wDone;
+	wire [`MAX_CORES-1:0] 			RENDREN_O;
+	reg [`MAX_CORE_BITS-1:0]  		wOMEMBankSelect;
 	reg [`WB_WIDTH-1:0] 			wOMEMReadAddr;  //Output adress (relative to current bank)
-	wire [`WB_WIDTH-1:0]       wOMEMData;	 	//Output data bus (Wishbone)
+	wire [`WB_WIDTH-1:0]       		wOMEMData;	 	//Output data bus (Wishbone)
 	reg								rHostEnable;
 	integer							k,out2;
 	wire GRDY_I;
@@ -91,40 +91,40 @@ module TestBench_Theia;
 
 THEIA GPU 
 		(
-		.CLK_I( Clock ), 
-		.RST_I( Reset ), 
-		.RENDREN_I( RENDREN_O ),
-		.DAT_I( DAT_O ),
-		.ACK_I( ACK_O ),
+		.CLK_I			( Clock ), 
+		.RST_I			( Reset ), 
+		.RENDREN_I		( RENDREN_O ),
+		.DAT_I			( DAT_O ),
+		.ACK_I			( ACK_O ),
 
-		.CYC_I( CYC_O ),
-		.MST_I( MST_O ),
-		.TGA_I( TGA_O ),
-		.ACK_O( ACK_I ),
-		.ADR_I( ADR_O ),
-		.WE_I(  WE_O  ),
-		.SEL_I( wCoreSelect ),
-		.STB_I( STB_O ),
+		.CYC_I			( CYC_O ),
+		.MST_I			( MST_O ),
+		.TGA_I			( TGA_O ),
+		.ACK_O			( ACK_I ),
+		.ADR_I			( ADR_O ),
+		.WE_I			(  WE_O  ),
+		.SEL_I			( wCoreSelect ),
+		.STB_I			( STB_O ),
 		
 		//Output memory
-		.OMBSEL_I( wOMEMBankSelect ),
-		.OMADR_I( wOMEMReadAddr ),
-		.OMEM_O( wOMEMData ),
-		.TMDAT_I( TMDAT_O ),
-		.TMADR_I( TMADR_O ),
-		.TMWE_I(  TMWE_O ),
-		.TMSEL_I( TMSEL_O ),
+		.OMBSEL_I		( wOMEMBankSelect ),
+		.OMADR_I		( wOMEMReadAddr ),
+		.OMEM_O			( wOMEMData ),
+		.TMDAT_I		( TMDAT_O ),
+		.TMADR_I		( TMADR_O ),
+		.TMWE_I			(  TMWE_O ),
+		.TMSEL_I		( TMSEL_O ),
 		
-		.HDL_O( GRDY_I ),
-		.HDLACK_I( GACK_O ),
-		.STDONE_I( STDONE_O ),
-		.RCOMMIT_O( wGPUCommitedResults ),
-		.HDA_I( wHostDataAvailable ),
+		.HDL_			( GRDY_I ),
+		.HDLACK_I		( GACK_O ),
+		.STDONE_I		( STDONE_O ),
+		.RCOMMIT_O		( wGPUCommitedResults ),
+		.HDA_I			( wHostDataAvailable ),
 
 		//Control register
-		.CREG_I( rControlRegister[0][15:0] ),
+		.CREG_I			( rControlRegister[0][15:0] ),
 		//Other stuff
-		.DONE_O( wDone )
+		.DONE_O			( wDone )
 
 	);
 
