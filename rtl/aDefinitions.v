@@ -192,13 +192,14 @@ Module Description:
 // ** User Registers **//
 //General Purpose registers, the user may put what ever he/she
 //wants in here...
-`define C1     `DATA_ADDRESS_WIDTH'd64 
-`define C2     `DATA_ADDRESS_WIDTH'd65 
-`define C3     `DATA_ADDRESS_WIDTH'd66 
-`define C4     `DATA_ADDRESS_WIDTH'd67 
-`define C5     `DATA_ADDRESS_WIDTH'd68 
-`define C6     `DATA_ADDRESS_WIDTH'd69 
-`define C7     `DATA_ADDRESS_WIDTH'd70 
+`define C1     	`DATA_ADDRESS_WIDTH'd64 
+`define C2     	`DATA_ADDRESS_WIDTH'd65 
+`define C3     	`DATA_ADDRESS_WIDTH'd66 
+`define C4     	`DATA_ADDRESS_WIDTH'd67 
+`define C5     	`DATA_ADDRESS_WIDTH'd68 
+`define C6     	`DATA_ADDRESS_WIDTH'd69 
+`define C7     	`DATA_ADDRESS_WIDTH'd70 
+
 `define R1		`DATA_ADDRESS_WIDTH'd71 
 `define R2		`DATA_ADDRESS_WIDTH'd72 
 `define R3		`DATA_ADDRESS_WIDTH'd73 
@@ -275,7 +276,7 @@ Module Description:
 //All this is just to tell you: Don't play with these values!
 
 // *** Type I Instructions (OP DST REG1 REG2) ***
-`define NOP    `INSTRUCTION_OP_LENGTH'b0_000000 	//0
+`define NOP    	`INSTRUCTION_OP_LENGTH'b0_000000 	//0
 `define ADD 	`INSTRUCTION_OP_LENGTH'b0_000001 	//1
 `define SUB		`INSTRUCTION_OP_LENGTH'b0_000010 	//2
 `define DIV		`INSTRUCTION_OP_LENGTH'b0_000011 	//3
@@ -290,20 +291,20 @@ Module Description:
 `define JLEX	`INSTRUCTION_OP_LENGTH'b0_001_101 	//13 - D
 `define INC		`INSTRUCTION_OP_LENGTH'b0_001_110	//14 - E
 `define ZERO	`INSTRUCTION_OP_LENGTH'b0_001_111	//15 - F
-`define JGY		`INSTRUCTION_OP_LENGTH'b0_010_000  	//16
-`define JLY		`INSTRUCTION_OP_LENGTH'b0_010_001 	//17
-`define JEQY	`INSTRUCTION_OP_LENGTH'b0_010_010  	//18
-`define JNEY	`INSTRUCTION_OP_LENGTH'b0_010_011 	//19
-`define JGEY	`INSTRUCTION_OP_LENGTH'b0_010_100 	//20
-`define JLEY	`INSTRUCTION_OP_LENGTH'b0_010_101  	//21
-`define CROSS	`INSTRUCTION_OP_LENGTH'b0_010_110	//22
-`define DOT		`INSTRUCTION_OP_LENGTH'b0_010_111	//23
-`define JGZ		`INSTRUCTION_OP_LENGTH'b0_011_000 	//24
-`define JLZ		`INSTRUCTION_OP_LENGTH'b0_011_001	//25
-`define JEQZ	`INSTRUCTION_OP_LENGTH'b0_011_010 	//26
-`define JNEZ	`INSTRUCTION_OP_LENGTH'b0_011_011	//27
-`define JGEZ	`INSTRUCTION_OP_LENGTH'b0_011_100	//28
-`define JLEZ	`INSTRUCTION_OP_LENGTH'b0_011_101 	//29
+`define JGY		`INSTRUCTION_OP_LENGTH'b0_010_000  	//16 - h10
+`define JLY		`INSTRUCTION_OP_LENGTH'b0_010_001 	//17 - h11
+`define JEQY	`INSTRUCTION_OP_LENGTH'b0_010_010  	//18 - h12
+`define JNEY	`INSTRUCTION_OP_LENGTH'b0_010_011 	//19 - h13
+`define JGEY	`INSTRUCTION_OP_LENGTH'b0_010_100 	//20 - h14
+`define JLEY	`INSTRUCTION_OP_LENGTH'b0_010_101  	//21 - h15
+`define CROSS	`INSTRUCTION_OP_LENGTH'b0_010_110	//22 - h16
+`define DOT		`INSTRUCTION_OP_LENGTH'b0_010_111	//23 - h17
+`define JGZ		`INSTRUCTION_OP_LENGTH'b0_011_000 	//24 - h18
+`define JLZ		`INSTRUCTION_OP_LENGTH'b0_011_001	//25 - h19
+`define JEQZ	`INSTRUCTION_OP_LENGTH'b0_011_010 	//26 - h1A
+`define JNEZ	`INSTRUCTION_OP_LENGTH'b0_011_011	//27 - h1B
+`define JGEZ	`INSTRUCTION_OP_LENGTH'b0_011_100	//28 - h1C
+`define JLEZ	`INSTRUCTION_OP_LENGTH'b0_011_101 	//29 - h1D
 
 //The next instruction is for simulation debug only
 //not to be synthetized! Pretty much behaves the same
@@ -367,6 +368,3 @@ Module Description:
 `define SWIZZLE_ZXZ		32'd19
 `define SWIZZLE_ZYZ		32'd20
 `define SWIZZLE_YXZ		32'd21
-
-
-

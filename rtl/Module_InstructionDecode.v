@@ -35,36 +35,41 @@ output  wire 		[`DATA_ROW_WIDTH-1:0]				oSource0, oSource1,			// Rs1, Rs2 -> 96b
 output  wire 		[`DATA_ADDRESS_WIDTH-1:0]	   		oDestination,				// Rd -> 16bit memory address
 
 input 	wire 		[`DATA_ROW_WIDTH-1:0]          		iDataForward,				// what is it?
-input 	wire 		[`DATA_ADDRESS_WIDTH-1:0]      		iLastDestination,
+input 	wire 		[`DATA_ADDRESS_WIDTH-1:0]      		iLastDestination,			// final Rd?
 
 `ifdef DEBUG
-	input wire [`ROM_ADDRESS_WIDTH-1:0] iDebug_CurrentIP,
-	output wire [`ROM_ADDRESS_WIDTH-1:0] oDebug_CurrentIP,
+	input 	wire 	[`ROM_ADDRESS_WIDTH-1:0] 			iDebug_CurrentIP,
+	output 	wire 	[`ROM_ADDRESS_WIDTH-1:0] 			oDebug_CurrentIP,
 `endif
 
-//input wire   [`ROM_ADDRESS_WIDTH-1:0]	   iIP,
-//output reg  [`ROM_ADDRESS_WIDTH-1:0]     oReturnAddress,
-output wire                               oDataReadyForExe
+// input wire   [`ROM_ADDRESS_WIDTH-1:0]	   iIP,
+// output reg  [`ROM_ADDRESS_WIDTH-1:0]     oReturnAddress,
+output 	wire                               				oDataReadyForExe			// Execution을 위한 enable signal
 
 );
 wire wInmediateOperand;
-wire [`DATA_ROW_WIDTH-1:0]	wSource0,wSource1;
-wire wTriggerSource0DataForward,wTriggerSource1DataForward;
-wire wSource0AddrssEqualsLastDestination,wSource1AddrssEqualsLastDestination;
+wire [`DATA_ROW_WIDTH-1:0]	wSource0, wSource1;
+wire wTriggerSource0DataForward, wTriggerSource1DataForward;
+wire wSource0AddrssEqualsLastDestination, wSource1AddrssEqualsLastDestination;
 
 `ifdef DEBUG
-assign oDebug_CurrentIP = iDebug_CurrentIP;
+	assign oDebug_CurrentIP = iDebug_CurrentIP;
 `endif
-//See if operation takes scalar argument
-assign wInmediateOperand = iEncodedInstruction[`INSTRUCTION_IMM_BITPOS];
 
-//Has the value of the first argument fetched from IMEM
+// See if operation takes scalar argument
+assign wInmediateOperand = iEncodedInstruction[`INSTRUCTION_IMM_BITPOS]; // INSTRUCTION_IMM_BITPOS == 54bit imm val을 54bit로 표현하나?
+// iEncodedInstruction의 55번째 bit? -> immediate indicator?
+// 이거 오타아닌겨?? ImmediatieOperand
+
+// Has the value of the first argument fetched from IMEM
 assign wSource0 = iRamValue0;
-//Has the value of the second argument fetched from IMEM, or the value of the
-//destinatin register in case of scalar operation
-assign wSource1 = ( wInmediateOperand ) ? {oRamAddress1,iEncodedInstruction[15:0] ,32'b0,32'b0} : iRamValue1; //{oRamAddress1,oRamAddress0,32'b0,32'b0} : iRamValue1;
 
-//Data forwarding logic
+// Has the value of the second argument fetched from IMEM, or the value of the
+// destinatin register in case of scalar operation
+// wIn
+assign wSource1 = ( wInmediateOperand ) ? {oRamAddress1,iEncodedInstruction[15:0] ,32'b0,32'b0} : iRamValue1; //{oRamAddress1,oRamAddress0,32'b0,32'b0} : iRamValue1;
+ 
+// Data forwarding logic
 assign wSource0AddrssEqualsLastDestination = (oRamAddress0 == iLastDestination) ? 1'b1: 1'b0;
 assign wSource1AddrssEqualsLastDestination = (oRamAddress1 == iLastDestination) ? 1'b1: 1'b0;
 assign wTriggerSource0DataForward = wSource0AddrssEqualsLastDestination;
@@ -76,7 +81,8 @@ assign oRamAddress1 = iEncodedInstruction[31:16];
 //If operation takes a scalar value, then ask IMEM
 //for the previous value of the destination ([47:32])
 //and have this value ready at oRamAddress0
-MUXFULLPARALELL_16bits_2SEL RAMAddr0MUX 
+MUXFULLPARALELL_16bits_2SEL RAMAddr0MUX
+// 2 to 1 MUX - 
  (
   .Sel( wInmediateOperand ),
   .I1( iEncodedInstruction[15:0] ),
