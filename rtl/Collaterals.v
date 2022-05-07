@@ -1,3 +1,5 @@
+// Collaterals : subordinary, secondary
+
 `timescale 1ns / 1ps
 `include "aDefinitions.v"
 /**********************************************************************************
@@ -23,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 module FFD_POSEDGE_ASYNC_RESET # ( parameter SIZE=`WIDTH )
 	(
 	input wire Clock,
-	input wire Clear, 
+	input wire Clear, // reset signal
 	input wire [SIZE-1:0] D,
 	output reg [SIZE-1:0] Q
 	); 
@@ -426,8 +428,8 @@ always @( * )
 
       2'b00: O1 = I1;
       2'b01: O1 = I2;
-		2'b10: O1 = I3;
-		default: O1 = 16'b0;
+	  2'b10: O1 = I3;
+	  default: O1 = 16'b0;
 
     endcase
 

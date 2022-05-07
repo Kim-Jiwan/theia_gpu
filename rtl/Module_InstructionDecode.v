@@ -20,20 +20,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ***********************************************************************************/
 
-module InstructionDecode
+module InstructionDecode // 명령어 해독
 (
-input wire											Clock,
-input wire											Reset,
-input wire											iInstructionAvailable,
-input	wire[`INSTRUCTION_WIDTH-1:0]			iEncodedInstruction,
-input	wire[`DATA_ROW_WIDTH-1:0]				iRamValue0,										
-input	wire[`DATA_ROW_WIDTH-1:0]				iRamValue1,										
-output  wire[`DATA_ADDRESS_WIDTH-1:0]		oRamAddress0,oRamAddress1,
-output  wire[`INSTRUCTION_OP_LENGTH-1:0]	oOperation,
-output  wire [`DATA_ROW_WIDTH-1:0]			oSource0,oSource1,
-output  wire [`DATA_ADDRESS_WIDTH-1:0]	   oDestination,
-input wire [`DATA_ROW_WIDTH-1:0]          iDataForward,
-input wire [`DATA_ADDRESS_WIDTH-1:0]      iLastDestination,
+input 	wire											Clock,
+input 	wire											Reset,
+input 	wire											iInstructionAvailable,		// enable signal 같은 거 인듯
+input	wire		[`INSTRUCTION_WIDTH-1:0]			iEncodedInstruction,		// instruction 64bit
+input	wire		[`DATA_ROW_WIDTH-1:0]				iRamValue0,					// DATA_ROW_WIDTH == 96bit		
+input	wire		[`DATA_ROW_WIDTH-1:0]				iRamValue1,					// DATA_ROW_WIDTH == 96bit
+
+output  wire		[`DATA_ADDRESS_WIDTH-1:0]			oRamAddress0,oRamAddress1, 	// RAM 주소 1, 2
+output  wire		[`INSTRUCTION_OP_LENGTH-1:0]		oOperation,					// OPCODE 16bit
+output  wire 		[`DATA_ROW_WIDTH-1:0]				oSource0, oSource1,			// Rs1, Rs2 -> 96bit data
+output  wire 		[`DATA_ADDRESS_WIDTH-1:0]	   		oDestination,				// Rd -> 16bit memory address
+
+input 	wire 		[`DATA_ROW_WIDTH-1:0]          		iDataForward,				// what is it?
+input 	wire 		[`DATA_ADDRESS_WIDTH-1:0]      		iLastDestination,
 
 `ifdef DEBUG
 	input wire [`ROM_ADDRESS_WIDTH-1:0] iDebug_CurrentIP,
@@ -122,6 +124,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( `INSTRUCTION_OP_LENGTH ) FFD3
 	.D(iEncodedInstruction[`INSTRUCTION_WIDTH-1:`INSTRUCTION_WIDTH-`INSTRUCTION_OP_LENGTH]),
 	.Q( oOperation )
 );
+
 //Latch the Destination
 FFD_POSEDGE_SYNCRONOUS_RESET # ( `DATA_ADDRESS_WIDTH ) FFD2
 (

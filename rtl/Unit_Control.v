@@ -25,39 +25,39 @@ This is the main Finite State Machine.
 **********************************************************************************/
 
 `timescale 1ns / 1ps
-`include "aDefinitions.v"
+`include "aDefinitions.v" // parameter haeder file
 
-`define CU_AFTER_RESET_STATE 0
-`define CU_WAIT_FOR_INITIAL_CONFIGURATION 1
-`define CU_TRIGGER_CONFIGURATION_DATA_READ 2
-`define CU_WAIT_FOR_CONFIG_DATA_READ	3
-`define CU_ACK_CONFIG_DATA_READ 4
-`define CU_PRECALCULATE_CONSTANTS 5
-`define CU_WAIT_FOR_CONSTANT 6
-`define CU_ACK_PRECALCULATE_CONSTANTS 7
-`define CU_WAIT_FOR_TASK 8
-`define CU_READ_TASK_DATA 9
-`define CU_WAIT_TASK_DATA_READ 10
-`define CU_ACK_TASK_DATA_READ 11
-`define CU_TRIGGER_RGU 12
-`define CU_WAIT_FOR_RGU 13
-`define CU_ACK_RGU 14
-`define CU_TRIGGER_GEO 15
-`define CU_WAIT_FOR_GEO_SYNC 16
+`define CU_AFTER_RESET_STATE 					0
+`define CU_WAIT_FOR_INITIAL_CONFIGURATION 		1
+`define CU_TRIGGER_CONFIGURATION_DATA_READ 		2
+`define CU_WAIT_FOR_CONFIG_DATA_READ			3
+`define CU_ACK_CONFIG_DATA_READ 				4
+`define CU_PRECALCULATE_CONSTANTS 				5
+`define CU_WAIT_FOR_CONSTANT 					6
+`define CU_ACK_PRECALCULATE_CONSTANTS 			7
+`define CU_WAIT_FOR_TASK	 					8
+`define CU_READ_TASK_DATA 						9
+`define CU_WAIT_TASK_DATA_READ 					10
+`define CU_ACK_TASK_DATA_READ 					11
+`define CU_TRIGGER_RGU 							12
+`define CU_WAIT_FOR_RGU 						13
+`define CU_ACK_RGU 								14
+`define CU_TRIGGER_GEO 							15
+`define CU_WAIT_FOR_GEO_SYNC 					16
 //`define CU_CHECK_AABBIU_REQUEST 17
-`define CU_TRIGGER_TCC 17
+`define CU_TRIGGER_TCC 							17
 //`define CU_CHECK_BIU_REQUEST 18
 //`define CU_TRIGGER_TFF 18
 //`define CU_CHECK_GEO_DONE 19
 //`define CU_WAIT_FOR_TFF 19
-`define CU_TRIGGER_AABBIU 20
-`define CU_WAIT_FOR_AABBIU 21
-`define CU_TRIGGER_MAIN 22
-`define CU_WAIT_FOR_MAIN 23
-`define CU_ACK_MAIN 24
-`define CU_TRIGGER_PSU 25
-`define CU_WAIT_FOR_PSU 26
-`define CU_ACK_PSU 27
+`define CU_TRIGGER_AABBIU 						20
+`define CU_WAIT_FOR_AABBIU 						21
+`define CU_TRIGGER_MAIN 						22
+`define CU_WAIT_FOR_MAIN 						23
+`define CU_ACK_MAIN 							24
+`define CU_TRIGGER_PSU 							25
+`define CU_WAIT_FOR_PSU 						26
+`define CU_ACK_PSU 								27
 //`define CU_TRIGGER_PCU 28
 `define CU_WAIT_FOR_PCU 29
 `define CU_ACK_PCU 30

@@ -4,10 +4,10 @@
 //-------------------------------------------------------------------
 module ControlRegister
 (
-	input wire Clock,
-	input wire Reset,
-	input wire[15:0]	iControlRegister,
-	output wire[15:0] oControlRegister
+	input 	wire 				Clock,
+	input 	wire 				Reset,
+	input 	wire		[15:0]	iControlRegister, // input ControlRegister
+	output 	wire		[15:0] 	oControlRegister  // output ControlRegister
 );
 
 reg [15:0] rControlRegister;

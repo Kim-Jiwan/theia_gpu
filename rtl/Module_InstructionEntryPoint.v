@@ -2,23 +2,25 @@
 `include "aDefinitions.v"
 module InstructionEntryPoint
 (
-input wire                          Clock,
-input wire 								   Reset,
-input wire 								   iTrigger,
-input wire[`ROM_ADDRESS_WIDTH-1:0]  iInitialCodeAddress,
-input wire [`INSTRUCTION_WIDTH-1:0] iIMemInput,
+input wire                                  Clock,
+input wire 								    Reset,
+input wire 								    iTrigger,
+input wire      [`ROM_ADDRESS_WIDTH-1:0]    iInitialCodeAddress,
+input wire      [`INSTRUCTION_WIDTH-1:0]    iIMemInput,
 
-output wire                          oEPU_Busy,
-output wire [`ROM_ADDRESS_WIDTH-1:0] oEntryPoint,
-output wire                          oTriggerIFU,
-output wire [`ROM_ADDRESS_WIDTH-1:0] oInstructionAddr
+output wire                                 oEPU_Busy,
+output wire     [`ROM_ADDRESS_WIDTH-1:0]    oEntryPoint,
+output wire                                 oTriggerIFU,
+output wire     [`ROM_ADDRESS_WIDTH-1:0]    oInstructionAddr
 );
+// INSTRUCTION)WIDTH == 64bit
+// ROM_ADDRESS_WIDTH == 16bit
 
 assign oInstructionAddr = (oTriggerIFU) ? oEntryPoint : iInitialCodeAddress;
 assign oEPU_Busy = iTrigger | oTriggerIFU;
 
 
-
+// D flip-flop
 FFD_POSEDGE_ASYNC_RESET # ( 1 ) FFD1
 (
 .Clock(Clock),
